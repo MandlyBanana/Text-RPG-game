@@ -31,34 +31,36 @@ game = {
   "magic staff":{"quantity":1, "value":500},
   "health potion":{"quantity":5, "value":75},
   "magic potion":{"quantity":4, "value":100}},
-
+  
   "password":""
 }
 
 system("clear")
 
-usr_input = int(input("Which save file? >> "))
+usr_input = input("Which save file? >> ")
+if usr_input == int:
+  usr_input = usr_input
 print("")
-path = "saves/save" + str(usr_input) + ".json"
+path = "saves/save " + usr_input + ".json"
 if os.path.exists(path) == True:
   
   
   with open(path, "r") as save_file:
     temp_game = json.load(save_file)
-    usr_input1 = input("Please enter the password for save file " + str(usr_input) + " >> ")
+    usr_input1 = input("Please enter the password for save file " + usr_input + " >> ")
     if usr_input1 == temp_game["password"]:
       game = temp_game
-      print("Save file " + str(usr_input) + " selected.")
+      print("\nSave file " + usr_input + " selected.")
     else:
       sys.exit("Wrong password.")
 else:
-  print("No save file " + str(usr_input) + " found.")
+  print("No save file " + usr_input + " found.")
   with open(path, "w") as save_file: 
-    game["password"] = input("Please enter a new password for save file " + str(usr_input) + " >> ")
+    game["password"] = input("\nPlease enter a new password for save file " + usr_input + " >> ")
     json.dump(game, save_file)
-  print("Save file " + str(usr_input) + " created.")
+  print("\nSave file " + usr_input + " created.")
 
-print("\n")
+print("\n \n")
     
 #mob_list = ["chicken", "goblin", "loot_goblin", "bandit", "mage", "dragon"]
 # chicken drops 1-5 gold small chance to drop magic feather
