@@ -37,7 +37,8 @@ game = {
 
 system("clear")
 
-usr_input = input("Which save file? >> ")
+#ask user for which account and password
+usr_input = input("Enter username. >> ")
 if usr_input == int:
   usr_input = usr_input
 print("")
@@ -47,18 +48,18 @@ if os.path.exists(path) == True:
   
   with open(path, "r") as save_file:
     temp_game = json.load(save_file)
-    usr_input1 = input("Please enter the password for save file " + usr_input + " >> ")
+    usr_input1 = input("Please enter the password for " + usr_input + " >> ")
     if usr_input1 == temp_game["password"]:
       game = temp_game
-      print("\nSave file " + usr_input + " selected.")
+      print("\nUser " + usr_input + " selected.")
     else:
       sys.exit("Wrong password.")
 else:
-  print("No save file " + usr_input + " found.")
+  print("No user " + usr_input + " found.")
   with open(path, "w") as save_file: 
-    game["password"] = input("\nPlease enter a new password for save file " + usr_input + " >> ")
+    game["password"] = input("\nPlease enter a new password for " + usr_input + " >> ")
     json.dump(game, save_file)
-  print("\nSave file " + usr_input + " created.")
+  print("\nUser " + usr_input + " created.")
 
 print("\n \n")
     
@@ -363,6 +364,7 @@ while(True):
     print("Delete save file. (1)")
     print("Change password. (2)")
     print("Save. (3)")
+    print("Save and exit. (4)")
     print("")
     usr_input = input("Which setting would you like to change? >> ")
     if usr_input == "1" or usr_input == "Delete save file":
@@ -377,6 +379,10 @@ while(True):
     elif usr_input == "Save" or usr_input == "3":
       with open(path, "w") as save_file:
         json.dump(game, save_file)
+    elif usr_input == "Save and exit." or usr_input == "4":
+      with open(path, "w") as save_file:
+        json.dump(game, save_file)
+        exit("Saved and exited")
       
   print("")
 
